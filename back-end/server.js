@@ -1,7 +1,7 @@
 // require('./env').config();
 const mongoose = require('mongoose');
 const express = require('express');
-
+const path = require('path')
 const booking = require('./models/Booking')
 const bookingsRoute = require('./routes/api/bookings');
 const app = express();
@@ -9,7 +9,7 @@ const app = express();
 const bodyParser = require('body-parser'); //2.TO BE ABLE TO USE REQ.BODY
 const cors = require('cors')
 app.use(cors({ origin: process.env.CORS_ORIGINS }))
-
+app.use(express.static(path.resolve(__dirname, '../front-end/build')));
 const passport = require('passport'); //
 
 const adminRoute = require('./routes/api/admins');
@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 
 // Routes
 
-app.use('/api/admin' , adminRoute);
+app.use('/api/admins' , adminRoute);
 
 app.use('/api/bookings', bookingsRoute);
 
@@ -64,9 +64,3 @@ const port = process.env.PORT ||7000;
 
 
 app.listen(port, () => console.log(`server is running on  port ${port}`));
-
-
-
-
-
-

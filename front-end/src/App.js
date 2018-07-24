@@ -3,6 +3,13 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './App.css';
 
+import Register from './Components/auth/Register';
+import Login from './Components/auth/Login';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from './utils/setAuthToken';
+import { setCurrentAdmin, logoutAdmin } from './actions/authActions';
+import { Provider } from 'react-redux';
+import store from './store';
 import Springboard from './Components/Springboard';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
@@ -12,30 +19,51 @@ import Prices from './Components/Prices';
 import Qualifications from './Components/Qualifications';
 import Hero from './Components/Hero';
 import RealHero from './Components/RealHero';
-import Massage from './Components/Massage';
+import PrivateYoga from './Components/PrivateYoga';
+import PrivateMassage from './Components/PrivateMassage';
+
+//!/!/!/!/ ELOUISE RUN THIS FUNCTION TO LOGOUT A USER. MAKE SURE YOU IMPORT STORE AND LOGOUTADMIN THOUGH
+// store.dispatch(logoutAdmin())
+
+if (localStorage.jwtToken) {
+  setAuthToken(localStorage.jwtToken);
+
+  const decoded = jwt_decode(localStorage.jwtToken);
+  store.dispatch(setCurrentAdmin(decoded));
+  const currentTime = Date.now() / 1000;
+  if (decoded.exp < currentTime) {
+    store.dispatch(logoutAdmin());
+    window.location.href = '/login';
+  }
+}
 
 const App = () => (
-  <Router>
-    <div className="App">
-      <Route exact path="/" component={RealHero} />
-      <Route exact path="/" component={Springboard} />
-      <Route exact path="/aboutme" className="notHome" component={Navbar} />
-      <Route
-        exact
-        path="/qualifications"
-        className="notHome"
-        component={Navbar}
-      />
-      <Route exact path="/prices" className="notHome" component={Navbar} />
+  <Provider store={store}>
+    <Router>
+      <div className="App">
+        <Route exact path="/" component={RealHero} />
+        <Route exact path="/" component={Springboard} />
+        <Route exact path="/aboutme" className="notHome" component={Navbar} />
+        <Route
+          exact
+          path="/qualifications"
+          className="notHome"
+          component={Navbar}
+        />
+        <Route exact path="/prices" className="notHome" component={Navbar} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
 
-      <Route exact path="/aboutme" component={Aboutme} />
-      <Route exact path="/qualifications" component={Qualifications} />
-      <Route exact path="/pricing" component={Prices} />
-      <Route exact path="/massage" component={Massage} />
+        <Route exact path="/aboutme" component={Aboutme} />
+        <Route exact path="/qualifications" component={Qualifications} />
+        <Route exact path="/pricing" component={Prices} />
+        <Route exact path="/privateyoga" component={PrivateYoga} />
+        <Route exact path="/privatemassage" component={PrivateMassage} />
 
-      <Footer />
-    </div>
-  </Router>
+        <Footer />
+      </div>
+    </Router>
+  </Provider>
 );
 
 export default App;
