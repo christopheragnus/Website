@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
 import Springboard from './Components/Springboard';
-import Landing from './Components/Description';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Aboutme from './Components/Aboutme';
@@ -13,6 +12,7 @@ import Prices from './Components/Prices';
 import Qualifications from './Components/Qualifications';
 import Hero from './Components/Hero';
 import RealHero from './Components/RealHero';
+import Massage from './Components/Massage';
 
 const App = () => (
   <Router>
@@ -31,6 +31,7 @@ const App = () => (
       <Route exact path="/aboutme" component={Aboutme} />
       <Route exact path="/qualifications" component={Qualifications} />
       <Route exact path="/pricing" component={Prices} />
+      <Route exact path="/massage" component={Massage} />
 
       <Footer />
     </div>

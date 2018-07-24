@@ -8,7 +8,7 @@ import gmail from '../Assets/social/gmail.png';
 export default () => {
   return (
     <div>
-      <footer className="navbar bottom bg-dark text-white p-9 text-center custombar">
+      <footer className="navbar sticky-bottom bg-dark text-white p-9 text-center custombar">
         <a href="https://www.facebook.com/savasanaonsundays/" target="_blank">
           <img className="socialimg" src={facebook} />
         </a>
