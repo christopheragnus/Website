@@ -10,6 +10,7 @@ const store = createStore(
   //these are part of redux (create store and apply middleware)
   rootReducer,
   initialState,
+
   compose(
     //COMPOSE IS
     applyMiddleware(...middleware),

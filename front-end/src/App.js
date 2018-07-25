@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './App.css';
-
+import PendingBookings from './Components/PendingBookings';
+import ConfirmedBookings from './Components/ConfirmedBookings';
 import Register from './Components/auth/Register';
 import Login from './Components/auth/Login';
 import jwt_decode from 'jwt-decode';
@@ -14,17 +15,15 @@ import Springboard from './Components/Springboard';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Aboutme from './Components/Aboutme';
-import Bookings from './Components/Bookings';
+
 import Prices from './Components/Prices';
 import Qualifications from './Components/Qualifications';
 import Hero from './Components/Hero';
 import RealHero from './Components/RealHero';
-import PrivateYoga from './Components/PrivateYoga';
-import PrivateMassage from './Components/PrivateMassage';
-import Stripe from './api/Stripe';
+import BookingForm from './Components/BookingForm';
+import Dashboard from './Components/Dashboard';
 
-require('dotenv').config();
-
+import { Container, Row, Col } from 'reactstrap';
 //!/!/!/!/ ELOUISE RUN THIS FUNCTION TO LOGOUT A USER. MAKE SURE YOU IMPORT STORE AND LOGOUTADMIN THOUGH
 // store.dispatch(logoutAdmin())
 
@@ -44,6 +43,7 @@ const App = () => (
   <Provider store={store}>
     <Router>
       <div className="App">
+        {/* Public Routes */}
         <Route exact path="/" component={RealHero} />
         <Route exact path="/" component={Springboard} />
         <Route exact path="/aboutme" className="notHome" component={Navbar} />
@@ -53,18 +53,35 @@ const App = () => (
           className="notHome"
           component={Navbar}
         />
-        <Route exact path="/prices" className="notHome" component={Navbar} />
+        <Route exact path="/" component={Footer} />
+        <Route exact path="/pricing" className="notHome" component={Navbar} />
+        <Route exact path="/pricing" component={Prices} />
+        <Route exact path="/pricing" className="notHome" component={Footer} />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
 
+        <Route exact path="/login" component={Login} />
         <Route exact path="/aboutme" component={Aboutme} />
         <Route exact path="/qualifications" component={Qualifications} />
-        <Route exact path="/pricing" component={Prices} />
-        <Route exact path="/privateyoga" component={PrivateYoga} />
-        <Route exact path="/privatemassage" component={PrivateMassage} />
-        <Route exact path="/payment" component={Stripe} />
+        <Route
+          exact
+          path="/bookingform"
+          className="notHome"
+          component={Navbar}
+        />
+        <Route exact path="/bookingform" component={BookingForm} />
+        <Route exact path="/bookingform" component={Footer} />
 
-        <Footer />
+        {/* Admin Routes */}
+
+        <Route path="/dashboard" component={Dashboard} />
+        <Container fluid className="test">
+          <Route exact path="/dashboard" component={PendingBookings} />
+          <Route
+            exact
+            path="/dashboard/confirmed"
+            component={ConfirmedBookings}
+          />
+        </Container>
       </div>
     </Router>
   </Provider>
