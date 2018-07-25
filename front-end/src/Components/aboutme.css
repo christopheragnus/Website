@@ -8,3 +8,34 @@
 .child {
   padding: 20px;
 }
+
+.abovethepage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #fbab7e;
+  background-image: linear-gradient(135deg, #fbab7e 0%, #f7ce68 100%);
+}
+
+.entryform {
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+  padding: 40px;
+  background-color: white;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+  -moz-box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 0 10px 6px -6px #777;
+  min-height: 200px;
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.paybutton {
+  padding: 20px;
+}

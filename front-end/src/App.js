@@ -21,6 +21,9 @@ import Hero from './Components/Hero';
 import RealHero from './Components/RealHero';
 import PrivateYoga from './Components/PrivateYoga';
 import PrivateMassage from './Components/PrivateMassage';
+import Stripe from './api/Stripe';
+
+require('dotenv').config();
 
 //!/!/!/!/ ELOUISE RUN THIS FUNCTION TO LOGOUT A USER. MAKE SURE YOU IMPORT STORE AND LOGOUTADMIN THOUGH
 // store.dispatch(logoutAdmin())
@@ -59,6 +62,7 @@ const App = () => (
         <Route exact path="/pricing" component={Prices} />
         <Route exact path="/privateyoga" component={PrivateYoga} />
         <Route exact path="/privatemassage" component={PrivateMassage} />
+        <Route exact path="/payment" component={Stripe} />
 
         <Footer />
       </div>
